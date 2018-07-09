@@ -7,7 +7,7 @@
     $serverName     = "localhost";
     $userName       = "root";
     $password       = "root";
-    $db             = "fileHandler";
+    $db             = "nakedfiles";
 
     $conn = connection($serverName, $userName, $password);
 
@@ -17,4 +17,6 @@
             $connReady = newConn($serverName, $userName, $password, $db);
         }
     }
+
+    $conn->close();
 ?>

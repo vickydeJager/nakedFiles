@@ -6,14 +6,13 @@
         $usedb =  $conn->query($use);
 
         if (!$usedb) {
-            $create = "CREATE DATABASE " . $db;
+            $create =  "CREATE DATABASE IF NOT EXISTS `nakedfiles` CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
-            if ($conn->query($create) === false){
+            if ($conn->query($create) === true){
+                tblFiles($conn, $db);
+            }else{
                 echo "Error creating database: " . $conn->error;
             }
-
-            tblFiles($conn, $db);
-            // scenario - db create but not the table
         }
 
         return true;
