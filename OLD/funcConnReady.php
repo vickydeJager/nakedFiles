@@ -1,4 +1,6 @@
 <?php
+    require "funcFiles.php";
+
     function newConn($serverName, $userName, $password, $db){
         $conn = new mysqli($serverName, $userName, $password, $db);
 
