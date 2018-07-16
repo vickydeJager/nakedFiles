@@ -6,10 +6,11 @@ CREATE TABLE IF NOT EXISTS files (
     `id` INT(6) AUTO_INCREMENT PRIMARY KEY,  
     `imageId` INT(6) NULL,
     `name` VARCHAR(250) NOT NULL,  
-    `type` VARCHAR(50) NOT NULL DEFAULT 'text/plain',  
+    `mime` VARCHAR(50) NOT NULL DEFAULT 'text/plain',  /*type*/
     `size` BIGINT NOT NULL DEFAULT '0',  
     `data` LONGBLOB NOT NULL,  
-    `path` VARCHAR(250) NOT NULL
+    `path` VARCHAR(250) NOT NULL,
+    `created` DATETIME NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS images ( 

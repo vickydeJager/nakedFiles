@@ -1,5 +1,5 @@
 <?php
-class Database{
+class Database {
     private static $serverName  = "localhost";
     private static $userName    = "root";
     private static $password    = "root";
@@ -16,9 +16,10 @@ class Database{
         {     
             try
             {
-                self::$conn =  new PDO( "mysql:host=".self::$serverName.";"."dbname=".self::$db, self::$userName, self::$password); 
+                self::$conn = new mysqli(self::$serverName, self::$userName, self::$password, self::$db);
+                //self::$conn =  new PDO( "mysql:host=".self::$serverName.";"."dbname=".self::$db, self::$userName, self::$password); 
             }
-            catch(PDOException $e)
+            catch(Exception $e)
             {
                 die($e->getMessage()); 
             }

@@ -1,19 +1,30 @@
 <?php
 include 'database.php';
-class Queries{
+class Queries {
 
     public static function selectAllFiles() {
-        $pdo = Database::connect();
+        $conn = Database::connect();
 
         $sql = 'SELECT * FROM `files`';
-        return $pdo->query($sql, PDO::FETCH_ASSOC);
+        return $conn->query($sql);
     }
   
     public static function saveFile($name, $mime, $size, $data, $path) {
-        $pdo = Database::connect();
+        $conn = Database::connect();
 
-        $sql = "INSERT INTO files (name,mime,size,data,path) values('$name', '$mime', '$size', '$data', '$path')";
-        return $pdo->query($sql, PDO::FETCH_ASSOC);
+        $sql = "INSERT INTO files (name,mime,size,data,path,created) values('$name', '$mime', '$size', '$data', '$path', NOW())";
+        return $conn->query($sql);
+    }
+
+    public static function downloadFile($id){
+        $conn = Database::connect();
+
+        $sql = "SELECT `mime`, `name`, `size`, `data` FROM `files` WHERE `id` = '$id'";
+        return $conn->query($sql);
+    }
+
+    public static function clear($result){
+        self::mysqli_free_result($result);
     }
 }
 ?>

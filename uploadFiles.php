@@ -1,5 +1,5 @@
 <?php
-    //print_r($_FILES);// exit;
+require "queries.php";
 
     if(!empty($_FILES)){
         $target_dir = "files/";
@@ -12,7 +12,6 @@
         $fileTmpName = $_FILES['fileToUpload']['tmp_name'];
         $fileSize = $_FILES['fileToUpload']['size'];
 
-        print_r($_FILES['fileToUpload']['tmp_name']); exit;
         if(isset($_POST["submit"])) { 
             if (!file_exists($target_dir)) {
                 mkdir($target_dir);
@@ -39,12 +38,20 @@
             }
         }
 
-        require "queries.php";
+        if ($_FILES['fileToUpload']['error'] == 0) {
+            
+            $result = Queries::saveFile($fileName, $fileType, $fileSize, $fileTmpName, $target_file);
 
-        $result = Queries::saveFile($fileName, $fileType, $fileSize, $fileTmpName, $target_file);
+            if($result) {
+                $_SESSION['file']['success'] = 'Success! Your file was successfully added!';
+            }else {
+                $_SESSION['file']['error'] = "Error! Failed to insert the file <pre>{$pdo->error}</pre>";
+            }
+        } else {
+            $_SESSION['file']['error'] = "Sorry, there was an error uploading your file. Error code: " .  intval($_FILES['uploaded_file']['error']);
+        }
 
         Database::disconnect();
         header('Location: index.php'); 
     }
-    
 ?>
