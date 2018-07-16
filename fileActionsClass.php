@@ -1,5 +1,5 @@
 <?php 
-//include 'queries.php';
+include 'queries.php';
 class fileActions{
 
     public static function download($id) {

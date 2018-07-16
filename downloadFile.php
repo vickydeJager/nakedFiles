@@ -18,7 +18,8 @@ include 'queries.php';
                     header("Content-Length: ". $row['size']);
                     header("Content-Disposition: attachment; filename=". $row['name']);
 
-                    echo $row['data'];
+                    //echo $row['data']; 
+                    print_r($row['data']); exit;
                 } else {
                     $_SESSION['file']['error'] = 'Error! No image exists with that ID.';
                 }

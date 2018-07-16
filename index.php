@@ -61,6 +61,7 @@ if(isset($_SESSION['file']['success'])){
                   <th>Path</th>
                   <th>Created</th>
                   <th>Downloaded</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
              
@@ -68,10 +69,7 @@ if(isset($_SESSION['file']['success'])){
                   <pre>
                 <?php
                     include 'queries.php';
-                    include 'fileActions.php';
-
                     $result = Queries::selectAllFiles();
-
                     foreach ($result as $row) {
                 ?>
                 </pre>
@@ -81,8 +79,9 @@ if(isset($_SESSION['file']['success'])){
                     <td><?php echo  $row['size']; ?></td>
                     <td><?php echo  $row['path']; ?></td>
                     <td><?php echo  $row['created']; ?></td>
-                    <td><a href=<?php fileActions::download($row['id']); ?>>Download </a></td>
-                    </tr>
+                    <td><a href=<?php echo 'downloadFile.php?id='.$row['id']; ?>>Download </a></td>
+                    <td><a href=<?php echo 'deleteFile.php?id='.$row['id']; ?>>Delete </a></td>  
+                  </tr>
                     <?php } ?>
               </tbody>
             </table>
