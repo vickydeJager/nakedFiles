@@ -1,7 +1,7 @@
 <?php
 require "queries.php";
 
-    if(!empty($_FILES)){
+    if (!empty($_FILES)) {
         $target_dir = "files/";
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
         $uploadOk = 1;
@@ -22,7 +22,7 @@ require "queries.php";
                 $uploadOk = 0;
             }
 
-            if($fileExtension != "pdf") {
+            if ($fileExtension != "pdf") {
                 $_SESSION['file']['error'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                 $uploadOk = 0;
             }
@@ -30,7 +30,7 @@ require "queries.php";
 
         if ($uploadOk == 0) {
             $_SESSION['file']['error'] = "Sorry, your file was not uploaded.";
-        }else{
+        } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                 $_SESSION['file']['success'] = "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
             } else {
@@ -42,9 +42,9 @@ require "queries.php";
             
             $result = Queries::saveFile($fileName, $fileType, $fileSize, $fileTmpName, $target_file);
 
-            if($result) {
+            if ($result) {
                 $_SESSION['file']['success'] = 'Success! Your file was successfully added!';
-            }else {
+            } else {
                 $_SESSION['file']['error'] = "Error! Failed to insert the file <pre>{$pdo->error}</pre>";
             }
         } else {

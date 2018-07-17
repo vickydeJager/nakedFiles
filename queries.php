@@ -16,29 +16,25 @@ class Queries {
         return $conn->query($sql);
     }
 
-    public static function downloadFile($id){
+    public static function downloadFile($id) {
         $conn = Database::connect();
 
         $sql = "SELECT mime, name, size, data FROM files WHERE id = '$id'";
         return $conn->query($sql);
     }
 
-    public static function selectFileToDelete($id){
+    public static function selectFileToDelete($id) {
         $conn = Database::connect();
 
         $sql = "SELECT name, path FROM files WHERE id = '$id'";
         return $conn->query($sql);
     }
 
-    public static function deleteFile($id){
+    public static function deleteFile($id) {
         $conn = Database::connect();
 
         $sql = "DELETE FROM files WHERE id = '$id'";
         return $conn->query($sql);
-    }
-
-    public static function clear($result){
-       // self::mysqli_free_result($result);
     }
 }
 ?>

@@ -1,17 +1,17 @@
 <?php 
 include 'queries.php';
 
-    if(isset($_GET['id'])) {
+    if (isset($_GET['id'])) {
    
         $id = intval($_GET['id']);
     
-        if($id <= 0) {
+        if ($id <= 0) {
             die('The ID is invalid!');
         } else {
             $result = Queries::downloadFile($id);
 
-            if($result) {
-                if($result->num_rows == 1) {
+            if ($result) {
+                if ($result->num_rows == 1) {
                     $row = mysqli_fetch_assoc($result);
 
                     header("Content-Type: ". $row['mime']);

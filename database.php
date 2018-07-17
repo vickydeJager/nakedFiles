@@ -12,22 +12,17 @@ class Database {
     }
 
     public static function connect() {
-        if ( null == self::$conn )
-        {     
-            try
-            {
+        if ( null == self::$conn) {     
+            try {
                 self::$conn = new mysqli(self::$serverName, self::$userName, self::$password, self::$db);
-                //self::$conn =  new PDO( "mysql:host=".self::$serverName.";"."dbname=".self::$db, self::$userName, self::$password); 
-            }
-            catch(Exception $e)
-            {
+            } catch(Exception $e) {
                 die($e->getMessage()); 
             }
         }
         return self::$conn;
     }
 
-    public static function disconnect(){
+    public static function disconnect() {
         self::$conn = null;
     }
 }

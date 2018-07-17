@@ -20,11 +20,11 @@
 </head>
 
 <?php
-if(isset($_SESSION['file']['error'])){
+if (isset($_SESSION['file']['error'])) {
     echo $_SESSION['file']['error'];
     unset($_SESSION['file']['error']);
 }
-if(isset($_SESSION['file']['success'])){
+if (isset($_SESSION['file']['success'])) {
     echo $_SESSION['file']['success'];
     unset($_SESSION['file']['success']);
 }
@@ -34,7 +34,7 @@ if(isset($_SESSION['file']['success'])){
     <div class="container-fluid">
         <div class="card mb-3">
             <div class="card-header">
-                <i class="fa fa-table"></i> Data Table Example
+                <i class="fa fa-table"></i> Upload file
             </div>
             <div class="card-body">
                 <form action="uploadFiles.php" method="post" enctype="multipart/form-data">
@@ -49,7 +49,7 @@ if(isset($_SESSION['file']['success'])){
     <div class="container-fluid">
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Data Table Example</div>
+          <i class="fa fa-table"></i> Files</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -62,6 +62,8 @@ if(isset($_SESSION['file']['success'])){
                   <th>Created</th>
                   <th>Downloaded</th>
                   <th>Delete</th>
+                  <th>View</th>
+                 
                 </tr>
               </thead>
              
@@ -79,15 +81,17 @@ if(isset($_SESSION['file']['success'])){
                     <td><?php echo  $row['size']; ?></td>
                     <td><?php echo  $row['path']; ?></td>
                     <td><?php echo  $row['created']; ?></td>
-                    <td><a href=<?php echo 'downloadFile.php?id='.$row['id']; ?>>Download </a></td>
-                    <td><a href=<?php echo 'deleteFile.php?id='.$row['id']; ?>>Delete </a></td>  
+                    <td><a href="<?php echo 'downloadFile.php?id='.$row['id']; ?>" target="_blank"> Download </a></td>
+                    <td><a href="<?php echo 'deleteFile.php?id='.$row['id']; ?>" target="_blank"> Delete </a></td>  
+                    <td><a href="files/<?php echo $row['name'];?>" target="_blank"> View </a></td>     
+                   
                   </tr>
                     <?php } ?>
               </tbody>
             </table>
           </div>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        <div class="card-footer small text-muted"></div>
       </div>
     </div>
 
@@ -114,3 +118,6 @@ if(isset($_SESSION['file']['success'])){
     </body>
 
 </html>
+<?php
+//echo "<iframe src=\"files/BBG+Free+Week+of+Workouts-1.pdf\" width=\"100%\" style=\"height:100%\"></iframe>";
+?>

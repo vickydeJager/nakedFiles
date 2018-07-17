@@ -6,7 +6,7 @@ class fileActions{
         if (!empty($id) || $id != null) {
             $result = Queries::downloadFile($id);
 
-            if($result) {
+            if ($result) {
                 if($result->num_rows == 1) {
                     $row = mysqli_fetch_assoc($result);
 
